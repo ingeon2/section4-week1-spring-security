@@ -110,9 +110,10 @@ SecurityConfiguration 클래스에선 기존 userDetailsService 삭제(인메모
 JavaConfiguration 클래스에선 Config역할에 충실하며 갈아끼움(인메모리 -> DB)  
 그다음 DBMemberService 클래스에 비즈니스 로직들(리파지토리 save 가져와서 create로) 완성.  
 그다음 Spring Security에서 제공하는 컴포넌트 중 하나인 UserDetailsService 를 구현하는 HelloUserDetailsServiceV1 클래스 생성.  
-(InMemory User를 등록하는 데 사용했던 InMemoryUserDetailsManager 는 UserDetailsManager 인터페이스의 구현체이고,  
+(InMemory User를 등록하는 데 사용했던 InMemoryUserDetailsManager(SecurityConfiguration 클래스에서 유저 임의 생성했고, db 변화로 주석처리) 는  
+UserDetailsManager 인터페이스의 구현체이고,  
 UserDetailsManager 는 UserDetailsService 를 상속하는 확장 인터페이스라는 점 기억.)  
 HelloUserDetailsServiceV1 클래스를 잘 생성하기 위해, HelloAuthorityUtils 클래스 또한 생성.  
 엔티티를 db에 저장하는것과 db에서 꺼내와서 스프링 시큐리티로 사용하는 로직은 다르다.  
-즉, 저장하는것은 리파지토리에서부터 파생되어서 저장되고, 사용하는것은 HelloUserDetailsServiceV1 클래스가 구현한 추상매서드에서 실행된다.  
+즉, 저장하는것은 리파지토리 save 에서부터 파생되어서 저장되고, 사용하는것은 HelloUserDetailsServiceV1 클래스가 구현한 추상매서드(load)에서 실행된다.  
 여기까지 이해 가는가? 클래스들 열어보며 따라와라 어려워도.  

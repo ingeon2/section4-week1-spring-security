@@ -38,7 +38,7 @@ public class HelloUserDetailsServiceV1 implements UserDetailsService { //UserDet
         //Role 기반의 권한 정보(GrantedAuthority) 컬렉션을 생성
         Collection<? extends GrantedAuthority> authorities = helloAuthorityUtils.createAuthorities(findMember.getEmail());
 
-        //스프링의 User 객체는 권한도 넣어줘야함.
+        //스프링의 User 객체는 권한도 넣어줘야함, 이미 멤버 생성할때 passwordencoder로 암호화되어서 set 된 후라서 이후로는 암호화 안해도 댐.
         return new User(findMember.getEmail(), findMember.getPassword(), authorities);
 
     }
