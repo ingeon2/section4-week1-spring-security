@@ -52,6 +52,10 @@ public class Member extends Auditable {
         }
     }
 
+
+    //아래 enum
+    //⭐ Spring Security에서는 SimpleGrantedAuthority 를 사용해 Role 베이스 형태의 권한을 지정할 때
+    //‘ROLE_’ + 권한 명 형태로 지정해 주어야 합니다. 그렇지 않을 경우 적절한 권한 매핑이 이루어지지 않는다는 사실을 기억.
     public enum MemberRole {
         ROLE_USER,
         ROLE_ADMIN

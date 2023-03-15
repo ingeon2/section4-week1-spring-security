@@ -9,6 +9,11 @@
 <body>
     <div class="container" layout:fragment="content">
         <form action="/process_login" method="post">
+            <!-- 로그인 실패에 대한 메시지 표시 로직 추가 (SecurityConfiguration 클래스의 filterChain 매서드때문) -->
+            <!-- filterChain 매서드에서 에러 뜨면 "/auths/login-form?error" 여기 url로 가라는게 여기의 parm.error임-->
+            <div class="row alert alert-danger center" role="alert" th:if="${param.error != null}">
+                <div>로그인 인증에 실패했습니다.</div>
+            </div>
             <div class="row">
                 <div class="col-xs-2">
                     <input type="email" name="username"  class="form-control" placeholder="Email" />
