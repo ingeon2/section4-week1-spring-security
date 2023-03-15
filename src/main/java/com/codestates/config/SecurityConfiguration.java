@@ -21,7 +21,8 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .headers().frameOptions().sameOrigin()
-                //frameOptions()는 HTML 태그 중에서 <frame>이나 <iframe>, <object> 태그에서 
+                //frameOptions()는 HTML 태그 중에서 <frame>이나 <iframe>, <object> 태그(표시)는 원래 보안문제로 스프링 시큐리티 불가능.
+                //근데 h2 database의 기본콘솔이
                 //페이지를 렌더링(보게 되는 대화형 페이지로 바꾸는것)할지의 여부를 결정하는 기능
                 //동일 출처로부터 들어오는 request만 페이지 렌더링을 허용
 
@@ -81,7 +82,7 @@ public class SecurityConfiguration {
     }
 
 
-//    //여기는 인메모리에서나 사용하는 계정들이라, db방식으로 바꾸면서 주석처리해줄예정
+//    //여기는 인메모리에서나 사용하는 계정들이라, db방식으로 바꾸면서 userDetailsService 매서드 전체를 주석처리해줄예정
 //    //아래는 애플리케이션이 실행된 상태에서 사용자 인증을 위한 계정 정보를 메모리상에 고정된 값으로 설정한 예
 //    @Bean
 //    public UserDetailsManager userDetailsService() {

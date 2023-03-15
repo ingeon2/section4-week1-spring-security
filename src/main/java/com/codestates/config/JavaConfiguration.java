@@ -1,6 +1,8 @@
 package com.codestates.config;
 
+import com.codestates.member.DBMemberService;
 import com.codestates.member.InMemoryMemberService;
+import com.codestates.member.MemberRepository;
 import com.codestates.member.MemberService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +20,17 @@ public class JavaConfiguration {
     //InMemoryMemberService 클래스는 데이터베이스 연동 없이 메모리에 Spring Security의 User를 등록해야 하므로 UserDetailsManager 객체가 필요.
     // (원래라면 User등록시 db에 저장 후 db에서 꺼내와서 사용하므로 유저디테일스메니저 말고 다른 객체로 사용.)
     //또한, User 등록 시, 패스워드를 암호화한 후에 등록해야 하므로 Spring Security에서 제공하는 PasswordEncoder 객체가 필요
+
+//    @Bean
+//    public MemberService InMemoryMemberService(UserDetailsManager userDetailsManager, PasswordEncoder passwordEncoder) {
+//        return new InMemoryMemberService(userDetailsManager, passwordEncoder);
+//    }
+//    주석 이유는 DB로 바꿔줄거라서~ 주석 이유는 DB로 바꿔줄거라서~ 주석 이유는 DB로 바꿔줄거라서~ 주석 이유는 DB로 바꿔줄거라서~
+
     @Bean
-    public MemberService InMemoryMemberService(UserDetailsManager userDetailsManager, PasswordEncoder passwordEncoder) {
-        return new InMemoryMemberService(userDetailsManager, passwordEncoder);
+    public MemberService dbMemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
+        return new DBMemberService(memberRepository, passwordEncoder);
     }
+    //DBMemberService는 내부에서 데이터를 데이터베이스에 저장하고, 패스워드를 암호화해야 하므로
+    //위와 같이 MemberRepository와 PasswordEncoder 객체를 DI
 }

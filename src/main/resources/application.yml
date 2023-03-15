@@ -25,3 +25,7 @@ server:
   servlet:
     encoding:
       force-response: true
+# HelloAuthorityUtils 클래스에서 사용하기 위해 추가 (admin의 메일주소)
+mail:
+  address:
+    admin: admin@gmail.com
