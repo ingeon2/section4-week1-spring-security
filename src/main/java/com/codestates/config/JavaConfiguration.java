@@ -1,5 +1,6 @@
 package com.codestates.config;
 
+import com.codestates.auth.HelloAuthorityUtils;
 import com.codestates.member.DBMemberService;
 import com.codestates.member.InMemoryMemberService;
 import com.codestates.member.MemberRepository;
@@ -28,8 +29,8 @@ public class JavaConfiguration {
 //    주석 이유는 DB로 바꿔줄거라서~ 주석 이유는 DB로 바꿔줄거라서~ 주석 이유는 DB로 바꿔줄거라서~ 주석 이유는 DB로 바꿔줄거라서~
 
     @Bean
-    public MemberService dbMemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
-        return new DBMemberService(memberRepository, passwordEncoder);
+    public MemberService dbMemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder, HelloAuthorityUtils helloAuthorityUtils) {
+        return new DBMemberService(memberRepository, passwordEncoder, helloAuthorityUtils);
     }
     //DBMemberService는 내부에서 데이터를 데이터베이스에 저장하고, 패스워드를 암호화해야 하므로
     //위와 같이 MemberRepository와 PasswordEncoder 객체를 DI

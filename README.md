@@ -115,5 +115,57 @@ UserDetailsManager 인터페이스의 구현체이고,
 UserDetailsManager 는 UserDetailsService 를 상속하는 확장 인터페이스라는 점 기억.)  
 HelloUserDetailsServiceV1 클래스를 잘 생성하기 위해, HelloAuthorityUtils 클래스 또한 생성.  
 엔티티를 db에 저장하는것과 db에서 꺼내와서 스프링 시큐리티로 사용하는 로직은 다르다.  
-즉, 저장하는것은 리파지토리 save 에서부터 파생되어서 저장되고, 사용하는것은 HelloUserDetailsServiceV1 클래스가 구현한 추상매서드(load)에서 실행된다.  
+즉, 저장하는것은 리파지토리 save 에서부터 파생되어서 저장(저장될 때 암호화됨)되고,  
+사용하는것은 HelloUserDetailsServiceV1 클래스가 구현한 추상매서드(load)에서 실행된다.  
 여기까지 이해 가는가? 클래스들 열어보며 따라와라 어려워도.  
+HelloUserDetailsServiceV1을 개량해서 HelloUserDetailsServiceV2로 만들어줌.(캡슐화로 더 편하게. 각각 함수의 리턴값 인터페이스는 같아도 다름)  
+이제 User의 권한 정보를 데이터베이스에서 관리하도록 코드를 수정.  
+JPA를 이용해서 User와 User의 권한 정보 간에 연관 관계를 맺음.(Member 클래스에서 멤버변수를 @ElementCollection 애너테이션으로 추가)  
+하지만 여기까지 하면, Roles 테이블까지만 만들어질 뿐 저장되진 않는다.  
+그럼 User의 권한 정보를 관리하는 테이블도 만들어졌으니 이제 회원 가입 시, 해당 회원의 권한 정보를 MEMBER_ROLES 테이블에 저장하는 로직설정.  
+HelloAuthorityUtils 클래스에서 db저장용 로직을 추가한 후 DBMemberService에서 db저장용 로직을 추가(createMember매서드 안에서).  
+  
+잘 읽어보기.  
+HelloUserDetailsServiceV1 (인메모리, 자체클래스없어서 더 복잡.)  
+HelloUserDetailsServiceV2 (인메모리, 자체클래스 생겨서 캡슐화, 자체클래스로 리턴값 해줌.)  
+HelloUserDetailsServiceV3 (DB위해서 HelloAuthorityUtils 클래스에 로직추가, 자체클래스 생겨서 캡슐화, 자체클래스로 리턴값 해줌.)  
+각각 위와 같이 만들기 위해 작성된 코드들이 존재(DBMemberService, Member, HelloAuthorityUtils, JavaConfiguration 클래스에서 변경해줌)  
+  
+  
+Member객체의 멤버변수 roles를 보고 Spring Security 에서 내가 설정한대로 권한부여 해줘서 설정한대로 웹퍼이지 이동 가능.  
+  
+마지막으로 Custom AuthenticationProvider를 이용해 우리가 직접 로그인 인증을 처리하는 방법. (HelloUserAuthenticationProvider)  
+  
+  
+흐름.  
+사용자 정보 (Credential)가 포함된 사용자 요청이 들어옵니다.  
+인증 관리자에 의해 해당 Credential이 유효한지 체크하게 됩니다. (인증, HelloUserDetailsServiceV3 클래스)  
+적절한 Credential일 경우에는 요청에 맞는 권한을 가지고 있는지 접근 결정 관리자에 의해 체크하게 됩니다. (인가, HelloUserAuthenticationProvider 클래스)  
+적절한 권한을 가진 Credential일 경우 요청에 맞는 리소스에 접근하여 응답하게 됩니다.  
+  
+위처럼 사용자의 웹 요청이 Controller 같은 엔드포인트를 거쳐 접근하려는 리소스에 도달하기 전에  
+인증 관리자나 접근 결정 관리자 같은 컴포넌트가 중간에 웹 요청을 가로채  
+사용자의 크리덴셜과 접근 권한을 검증하는 것을 볼 수 있음.(SecurityConfiguration 클래스의 fillterchain 매서드)  
+그러한 가로챌 포인트를 제공하는 것이 서블릿 필터(Servlet Filter, 3.15 스샷존재).  
+서블릿 필터는 자바에서 제공하는 API이며, javax.servlet 패키지에 인터페이스 형태로 정의.  
+
+
+핵심 포인트  
+Spring Security를 애플리케이션에 적용하는 데 어려움을 겪는 큰 이유 중에 하나는  
+Spring Security의 아키텍처와 Spring Security의 컴포넌트들이  
+어떻게 인터랙션해서 인증, 권한 등의 보안 작업을 처리하는지 이해하지 못하기 때문이다.  
+  
+서블릿 필터(Servlet Filter)는 서블릿 기반 애플리케이션의 엔드포인트에 요청이 도달하기 전에  
+중간에서 요청을 가로챈 후 어떤 처리를 할 수 있도록 해주는 Java의 컴포넌트이다.  
+  
+Spring Security의 필터는 클라이언트의 요청을 중간에서 가로챈 뒤,  
+보안에 특화된 작업을 처리하는 역할을 한다.  
+  
+DelegatingFilterProxy라는 이름에서 알 수 있듯이  
+서블릿 컨테이너 영역의 필터와 ApplicationContext에 Bean으로 등록된 필터들을 연결해주는  
+브릿지 역할을 합니다.  
+  
+Spring Security의 Filter Chain은 Spring Security에서  
+보안을 위한 작업을 처리하는 필터의 모음이며,  
+Spring Security의 Filter를 사용하기 위한 진입점이 바로 FilterChainProxy입니다.  
+
