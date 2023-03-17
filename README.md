@@ -168,4 +168,9 @@ DelegatingFilterProxy라는 이름에서 알 수 있듯이
 Spring Security의 Filter Chain은 Spring Security에서  
 보안을 위한 작업을 처리하는 필터의 모음이며,  
 Spring Security의 Filter를 사용하기 위한 진입점이 바로 FilterChainProxy입니다.  
+  
+  
+멤버 클래스부터 쭈우우욱(여러 클래스 거쳐) 가져온 Authorities랑,  
+SecurityConfigration에서 설정해준 Authorities랑 비교해서    
+SecurityConfigration에서 설정해준 권한에 따라 작동하는것. (핵심)  
 

@@ -21,10 +21,10 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .headers().frameOptions().sameOrigin()
-                //frameOptions()는 HTML 태그 중에서 <frame>이나 <iframe>, <object> 태그(표시)는 원래 보안문제로 스프링 시큐리티 불가능.
-                //근데 h2 database의 기본콘솔이
-                //페이지를 렌더링(보게 되는 대화형 페이지로 바꾸는것)할지의 여부를 결정하는 기능
-                //동일 출처로부터 들어오는 request만 페이지 렌더링을 허용
+                //HTML 태그 중에서 <frame>이나 <iframe>, <object> 태그(표시)는 원래 보안문제로 스프링 시큐리티 불가능.
+                //근데 h2 database의 기본콘솔이 <frame> 을 사용하고,
+                //frameOptions().sameOrigin() 여기서 사용하게 해줌.
+                //(localhost:8080 까지는 같으니까 localhost:8080/h2도 세임오리진임.)
 
                 .and()
 
