@@ -43,7 +43,14 @@ public class HelloUserAuthenticationProvider implements AuthenticationProvider {
         try {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             //Username이 존재한다면 userDetailsService를 이용해 데이터베이스에서 해당 사용자를 조회
-            //내가 loadUserByUsername 이 매서드 어따쓰지? 생각했는데 드디어 쓰네
+            //내가 HelloUserDetailsServiceV3 클래스의 loadUserByUsername 이 매서드 어따쓰지? 생각했는데 드디어 쓰네
+            //내가 HelloUserDetailsServiceV3 클래스의 loadUserByUsername 이 매서드 어따쓰지? 생각했는데 드디어 쓰네
+            //내가 HelloUserDetailsServiceV3 클래스의 loadUserByUsername 이 매서드 어따쓰지? 생각했는데 드디어 쓰네
+            //내가 HelloUserDetailsServiceV3 클래스의 loadUserByUsername 이 매서드 어따쓰지? 생각했는데 드디어 쓰네
+            //내가 HelloUserDetailsServiceV3 클래스의 loadUserByUsername 이 매서드 어따쓰지? 생각했는데 드디어 쓰네
+            //내가 HelloUserDetailsServiceV3 클래스의 loadUserByUsername 이 매서드 어따쓰지? 생각했는데 드디어 쓰네
+            //내가 HelloUserDetailsServiceV3 클래스의 loadUserByUsername 이 매서드 어따쓰지? 생각했는데 드디어 쓰네
+
             
             String password = userDetails.getPassword();
             verifyCredentials(authToken.getCredentials(), password);
