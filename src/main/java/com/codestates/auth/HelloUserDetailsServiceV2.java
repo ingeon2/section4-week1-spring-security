@@ -1,11 +1,11 @@
 package com.codestates.auth;
 
+import com.codestates.auth.utils.HelloAuthorityUtils;
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
 import com.codestates.member.Member;
 import com.codestates.member.MemberRepository;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

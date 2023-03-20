@@ -54,8 +54,10 @@ public class InMemoryMemberService implements MemberService {
         return member;
     }
 
-
-
+    @Override
+    public Member findMember(String email) {
+        return null;
+    }
 
 
     //Java의 Stream API를 이용해 생성자 파라미터로 해당 User의 Role을 전달하면서 SimpleGrantedAuthority 객체를 생성한 후,

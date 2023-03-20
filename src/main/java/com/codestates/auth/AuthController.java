@@ -20,10 +20,10 @@ public class AuthController {
         return "home";
     }
 
-//    //이거 SecurityConfiguration 클래스의 .exceptionHandling().accessDeniedPage("/auths/access-denied")
-//    //로직 안되길래 추가해준 매서드
-//    @GetMapping("/access-denied")
-//    public String accessDenied() {
-//        return "access-denied";
-//    }
+    //이거 SecurityConfiguration 클래스의 .exceptionHandling().accessDeniedPage("/auths/access-denied")
+    //로직 안되길래 추가해준 매서드
+    @GetMapping("/access-denied")
+    public String accessDenied() {
+        return "access-denied";
+    }
 }

@@ -1,5 +1,6 @@
 package com.codestates.auth;
 
+import com.codestates.auth.utils.HelloAuthorityUtils;
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
 import com.codestates.member.Member;
@@ -46,7 +47,8 @@ public class HelloUserDetailsServiceV3 implements UserDetailsService { //UserDet
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
-            return helloAuthorityUtils.createAuthorities(this/*멤버*/.getRoles()); //V2와 매개변수가 바뀜 (by 매서드 오버로딩)
+            System.out.println("USER Role 정보는 DB에 있는걸로 제공");
+            return helloAuthorityUtils.createAuthorities(getRoles()); //V2와 매개변수가 바뀜 (by 매서드 오버로딩)
             //여기서의 Roles는 List<String> = {유저, 어드민} 이런식
             //Member(extends Member)에 전달한 Role 정보를 authorityUtils.createAuthorities() 메서드의 파라미터로 전달해서 권한 목록(List<GrantedAuthority>)을 생성
 

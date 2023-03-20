@@ -3,6 +3,7 @@ package com.codestates.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -12,6 +13,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity(debug = true)
 public class SecurityConfiguration {
 
 
@@ -70,16 +72,20 @@ public class SecurityConfiguration {
                         .antMatchers("/**").permitAll()
                 );
 
-        
-//                .authorizeHttpRequests()
+        return http.build(); //디폴트 시큐리티 필터체인 값
+    }
+
+
+
+    //                .authorizeHttpRequests()
 //                //클라이언트의 요청이 들어오면 접근 권한을 확인하겠다고 정의
 //                .anyRequest()
 //                .permitAll();
 //                //클라이언트의 모든 요청에 대해 접근을 허용 (★뒤에서 접근 권한 별로 페이지 접근을 제한할 것임.★)
-//        이전엔 모든 화면에 접근할 수 있었음.
-        
-        return http.build(); //디폴트 시큐리티 필터체인 값
-    }
+//        이전엔 모든 화면에 접근할 수 있었음. (위의 필터체인에서.)
+
+
+
 
 
 //    //여기는 인메모리에서나 사용하는 계정들이라, db방식으로 바꾸면서 userDetailsService 매서드 전체를 주석처리해줄예정
@@ -123,8 +129,3 @@ public class SecurityConfiguration {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }
-
-//SecurityConfiguration 클래스에서 설정해 둔 사용자 계정 정보는 다음과 같습니다.
-//email: kevin@gmail.com
-//password: 1111
-//Role: USER

@@ -84,7 +84,7 @@ public class HelloUserAuthenticationProvider implements AuthenticationProvider {
     
     //인증 절차를 위해 내가 만든 매서드
     private void verifyCredentials(Object credentials, String password) {
-        if(!passwordEncoder.matches((String) credentials, password)) {
+        if(!passwordEncoder.matches((String)credentials, password)) {
             throw new BadCredentialsException("Invalid User name or User Password");
         }
     }

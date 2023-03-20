@@ -1,5 +1,6 @@
 package com.codestates.auth;
 
+import com.codestates.auth.utils.HelloAuthorityUtils;
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
 import com.codestates.member.Member;
@@ -12,7 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @Component

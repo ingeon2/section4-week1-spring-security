@@ -1,6 +1,6 @@
 package com.codestates.member;
 
-import com.codestates.auth.HelloAuthorityUtils;
+import com.codestates.auth.utils.HelloAuthorityUtils;
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -51,5 +51,17 @@ public class DBMemberService implements MemberService {
         if(member.isPresent()) {
             throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
         }
+    }
+
+    public Member findMember(String email) {
+        return findVerifiedMember(email);
+    }
+
+    private Member findVerifiedMember(String email) {
+        Optional<Member> optionalMember = memberRepository.findByEmail(email);
+        Member findMember =
+                optionalMember.orElseThrow(() ->
+                        new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        return findMember;
     }
 }

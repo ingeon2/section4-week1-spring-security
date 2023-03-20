@@ -1,14 +1,12 @@
 package com.codestates.config;
 
-import com.codestates.auth.HelloAuthorityUtils;
+import com.codestates.auth.utils.HelloAuthorityUtils;
 import com.codestates.member.DBMemberService;
-import com.codestates.member.InMemoryMemberService;
 import com.codestates.member.MemberRepository;
 import com.codestates.member.MemberService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.UserDetailsManager;
 
 @Configuration
 public class JavaConfiguration {
@@ -34,4 +32,5 @@ public class JavaConfiguration {
     }
     //DBMemberService는 내부에서 데이터를 데이터베이스에 저장하고, 패스워드를 암호화해야 하므로
     //위와 같이 MemberRepository와 PasswordEncoder 객체를 DI
+    //V3로 바뀌며 헬로오더리티유틸스도 생성자 추가
 }
