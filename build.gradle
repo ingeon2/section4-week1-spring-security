@@ -28,6 +28,16 @@ dependencies {
 	implementation 'com.google.code.gson:gson'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	implementation 'org.bouncycastle:bcprov-jdk15to18:1.72'
+
+
+	// jwt 실습 위해 추가
+
+	testImplementation 'org.springframework.security:spring-security-test'
+
+	// JWT 생성 및 검증 테스트를 수행하기 위해 필요한 JWT 라이브러리
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly	'io.jsonwebtoken:jjwt-jackson:0.11.5'
 }
 
 tasks.named('test') {
