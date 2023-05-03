@@ -62,7 +62,7 @@ public class InMemoryMemberService implements MemberService {
 
     //Java의 Stream API를 이용해 생성자 파라미터로 해당 User의 Role을 전달하면서 SimpleGrantedAuthority 객체를 생성한 후,
     //List<SimpleGrantedAuthority> 형태로 리턴
-    private List<GrantedAuthority> createAuthorities(String... roles) {
+    private List<GrantedAuthority> createAuthorities(String... roles) { //...은 가변인자로 말 그대로 여러 개의 매개변수를 받을 수 있다는 말
         return Arrays.stream(roles)
                 .map(role -> new SimpleGrantedAuthority(role))
                 //SimpleGrantedAuthority 객체 생성할때, 매개변수 String 은 ROLE_ 이렇게시작되어야 함(Member 클래스 가서 enum 보렴)

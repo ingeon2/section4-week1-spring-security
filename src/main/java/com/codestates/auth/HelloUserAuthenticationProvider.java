@@ -30,6 +30,7 @@ public class HelloUserAuthenticationProvider implements AuthenticationProvider {
 
 
     //우리가 직접 작성한 인증 처리 로직을 이용해 사용자의 인증 여부를 결정
+    //원래 Security의 Servlet이 해주는 일이지만, 여기선 직접 해보도록 해서 경험상 작성.
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         UsernamePasswordAuthenticationToken authToken = (UsernamePasswordAuthenticationToken) authentication;
@@ -42,14 +43,6 @@ public class HelloUserAuthenticationProvider implements AuthenticationProvider {
 
         try {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-            //Username이 존재한다면 userDetailsService를 이용해 데이터베이스에서 해당 사용자를 조회
-            //내가 HelloUserDetailsServiceV3 클래스의 loadUserByUsername 이 매서드 어따쓰지? 생각했는데 드디어 쓰네
-            //내가 HelloUserDetailsServiceV3 클래스의 loadUserByUsername 이 매서드 어따쓰지? 생각했는데 드디어 쓰네
-            //내가 HelloUserDetailsServiceV3 클래스의 loadUserByUsername 이 매서드 어따쓰지? 생각했는데 드디어 쓰네
-            //내가 HelloUserDetailsServiceV3 클래스의 loadUserByUsername 이 매서드 어따쓰지? 생각했는데 드디어 쓰네
-            //내가 HelloUserDetailsServiceV3 클래스의 loadUserByUsername 이 매서드 어따쓰지? 생각했는데 드디어 쓰네
-            //내가 HelloUserDetailsServiceV3 클래스의 loadUserByUsername 이 매서드 어따쓰지? 생각했는데 드디어 쓰네
-            //내가 HelloUserDetailsServiceV3 클래스의 loadUserByUsername 이 매서드 어따쓰지? 생각했는데 드디어 쓰네
 
             
             String password = userDetails.getPassword();
